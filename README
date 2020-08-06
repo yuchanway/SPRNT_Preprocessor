@@ -1,0 +1,101 @@
+SPRNT Preprocessor
+Sep, 6, 2017
+
+Version 2.8 - 
+Modified the upstream input boundary condition. Now user can assign specific value for specific upstream nodes. 
+The upstream value should be saved in the same file as runoff(the netcdf file). In the past, the netcdf file only have two variables, COMID and runoff. Now the new netcdf file can contain one new varible, which is "upstream qsource". The layout of the upstream qsource is the same with the runoff data, which corresponds to COMID and timestep. The upstream source is optional, which means, if user does not define the upstream qsource, the preprocessor will use the default qsource for every upstream nodes.
+ 
+Steady state flag is added. - Sep, 6, 2017
+--
+The code is written by Dr. Frank Liu, from IBM Research.
+Modified by: Cheng-Wei Yu, from CRWR, UT Austin.
+
+========================================
+This preprocessor is for handling SPRNT's input data.
+In here, it requires two input files to create a complete .spt file to run the SPRNT simulation.
+1. Connectivity File(csv format)
+2. Runoff Data (netcdf format)
+
+The details about these two files will be expalined in the following description.
+
+========================================
+<Content>
+ 
+    Makefile        contains the code to compile the preprocessor code
+    nc_wrapper.C    contains the code to read in the runoff data in netcdf file
+    nc_wrapper.h    header file for nc_wrapper.C 
+    smap.h          contains the code to match strings to integers in the network map
+    tgraph.C        contains the main function of Preprocessor and other printing .spt file commands
+    tgraph.h        header file for tgraph.C
+    tt.C            contains command to read-in river-network from the connectivity file.   
+    util.h	    contains code to sue flexiable length vector and stack.
+
+========================================
+<Instruction>
+
+Before using the Preprocessor, make sure that your computer has netcdf library and c++ compiler(ex. g++). If without the netcdf library and c++ compiler, this Preprocessor will not be compiled correctly.
+
+Extract the file after downloading the Preprocessor from the following website:
+<null website address>
+ 
+In the terminal, change your working location to the directory where you extract the Preprocessor file by using
+
+$ cd /PREPROCESSOR_DIRECTORY/
+
+After entering the Preprocessor directory, type the following command:
+
+$ make
+
+Then several output file will be created(Including nc_wrapper.o, tgraph.o, tt.o and a.out).
+Now you should make sure that you have your "Connectivity File" and "Runoff Data" in this directory.
+
+$ ./Pre CONNECTIVITY_FILE_NAME RUNOFF_DATA_NAME
+
+The the preprocssor will return the number of river networks in you connectivity file. An example is shown in the following:
+
+
+
+--example start--
+$ ./Pre 21675798_SubXS_Connect.csv 21675798.nc 
+
+Total 10 nodes.
+Fixed 9 edges with length less than 222.0
+Region 0, root = 109, num vertices = 10
+Reading runoff data from 21675798.nc
+--example end--
+
+There is only one network in the file and its root node number is 109. If you would like to retrieve the data in the network with root 109, type the following command:
+
+$ ./Pre CONNECTIVITY_FILE_NAME RUNOFF_DATA_NAME 109
+
+Then Preprocessor will only retrieve the information of target network. Other irrelative information will be filtered out during the processing.
+
+A new file NAME.spt will be created in the current directory.
+
+
+Everytime you change the code, recompiling is required:
+
+$ make clean
+$ make realclean
+$ make
+
+Before creating a new .spt file. Otherwise the change of Preprocessor will not be applied. 
+
+===============
+
+If user just want to create a .spt file for steady state simulation, a steady state flag "-s" can be added.
+
+For example:
+
+$ ./Pre <CONNECTIVITY_FILE_NAME> <RUNOFF_DATA_NAME> <root_node> [-s]
+
+
+When -s flag is used. the preprocessor will only write lateral flow at t=0 and t=1.
+
+
+-CWY, Sep, 6, 2017
+
+
+ 
+
+

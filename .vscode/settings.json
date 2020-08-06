@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "tgraph.C": "cpp",
+        "tt.C": "cpp",
+        "nc_wrapper.C": "cpp"
+    }
+}
