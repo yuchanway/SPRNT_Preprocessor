@@ -7,8 +7,8 @@ The upstream value should be saved in the same file as runoff(the netcdf file). 
  
 Steady state flag is added. - Sep, 6, 2017
 --
-The code is written by Dr. Frank Liu, from IBM Research.
-Modified by: Cheng-Wei Yu, from CRWR, UT Austin.
+The code is written by Dr. Frank Liu, from Oak Ridge National Lab.
+Modified by: Dr. Cheng-Wei Yu, from UT Austin.
 
 ========================================
 This preprocessor is for handling SPRNT's input data.

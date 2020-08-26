@@ -13,13 +13,13 @@
 //#define steady_flag 0
 
 // name of the netlist file
-const char* outfile="Junction_Test_1.spt";
+const char* outfile="Test.spt";
 
 void printcontrol(FILE *fp) {
   fprintf(fp, "\n######\n");      // options
   fprintf(fp, "\n######\n");
   fprintf(fp, "def options metric=1 verbose=1 end\n"); // properly no need to change 
-  fprintf(fp, "def options prtq=1 prta=1 prtdepth=1 end\n");
+  fprintf(fp, "def options prtq=1 prta=1 prtdepth=1 prtfr=1 end\n");
   fprintf(fp, "def options stoptime=1488.0 stoptimeunit=hour end\n");     // 24x30 hours = 1 month
   fprintf(fp, "def options prtinterval=2.0 prtintervalunit=hour end\n"); // printing interval
   //fprintf(fp, "def options timestep=5 timestepunit=minute end\n"); // 240 sec time step
