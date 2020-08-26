@@ -1,0 +1,7 @@
+./.vscode
+*.spt
+*.output
+*.dat
+*.gz
+*.csv
+
