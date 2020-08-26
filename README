@@ -1,5 +1,15 @@
 SPRNT Preprocessor
-Sep, 6, 2017
+August 26, 2020, Cheng-Wei Yu
+
+Version 3.0 - 08/26/2020 
+
+(1)Change the junction feature when there is only one fanin. 
+
+(2)Adding qsource and lateral simplification feature to shrink the file size. 
+
+(3)fix minor bugs
+
+======
 
 Version 2.8 - 
 Modified the upstream input boundary condition. Now user can assign specific value for specific upstream nodes. 
